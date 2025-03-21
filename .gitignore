@@ -11,3 +11,5 @@ nginx/logs/*
 !nginx/.gitkeep
 
 !mysql/.gitkeep
+
+.env
