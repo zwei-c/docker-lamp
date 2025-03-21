@@ -1,0 +1,13 @@
+projects/*
+
+!projects/.gitkeep
+
+nginx/*.conf
+
+nginx/*.bak
+
+nginx/logs/*
+
+!nginx/.gitkeep
+
+!mysql/.gitkeep

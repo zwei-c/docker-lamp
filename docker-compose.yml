@@ -1,0 +1,137 @@
+services:
+  # --------------------------------PHP 7.3--------------------------------
+  php7.3:
+    build:
+      context: .
+      dockerfile: php/7.3/Dockerfile
+    image: php:7.3-fpm
+    container_name: php7.3
+    restart: always
+    volumes:
+      - ./projects:/var/www/html
+      - ./php/7.3/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    working_dir: /var/www/html
+    command: ["php-fpm"]
+    networks:
+      - app_network  
+  # --------------------------------PHP 7.4--------------------------------
+  php7.4:
+    build:
+      context: .
+      dockerfile: php/7.4/Dockerfile
+    image: php:7.4-fpm
+    container_name: php7.4
+    restart: always
+    volumes:
+      - ./projects:/var/www/html
+      - ./php/7.4/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    working_dir: /var/www/html
+    command: ["php-fpm"]
+    networks:
+      - app_network
+  # --------------------------------PHP 8.0--------------------------------
+  php8.0:
+    build:
+      context: .
+      dockerfile: php/8.0/Dockerfile
+    image: php:8.0-fpm
+    container_name: php8.0
+    restart: always
+    volumes:
+      - ./projects:/var/www/html
+      - ./php/8.0/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    working_dir: /var/www/html
+    command: ["php-fpm"]
+    networks:
+      - app_network    
+  # --------------------------------PHP 8.1--------------------------------
+  php8.1:
+    build:
+      context: .
+      dockerfile: php/8.1/Dockerfile
+    image: php:8.1-fpm
+    container_name: php8.1
+    restart: always
+    volumes:
+      - ./projects:/var/www/html
+      - ./php/8.1/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    working_dir: /var/www/html
+    command: ["php-fpm"]
+    networks:
+      - app_network
+  # --------------------------------PHP 8.3--------------------------------
+  php8.3:
+    build:
+      context: .
+      dockerfile: php/8.3/Dockerfile
+    image: php:8.3-fpm
+    container_name: php8.3
+    restart: always
+    volumes:
+      - ./projects:/var/www/html
+      - ./php/8.3/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    working_dir: /var/www/html
+    command: ["php-fpm"]
+    entrypoint: []
+    networks:
+      - app_network
+  # --------------------------------NGINX--------------------------------
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    image: nginx:latest
+    container_name: nginx_proxy
+    # restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./projects:/var/www/html
+      - ./nginx:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
+    networks:
+      - app_network
+  # --------------------------------MYSQL--------------------------------
+  mysql:
+    image: mysql:8.0              # 指定使用 MySQL 8.0 的官方映像
+    container_name: mysql         # 為容器指定一個易於識別的名稱（可選）
+    restart: always               # 當容器意外退出時自動重啟
+    environment:
+      MYSQL_ROOT_PASSWORD: 'G4!kR8@mN1#zQ5pL'   # 設定 root 用戶的密碼
+    ports:
+      - "3306:3306"              # 將主機的 3306 埠映射到容器內的 3306 埠（僅在需要外部訪問時設定）
+    volumes:
+      - mysql_data:/var/lib/mysql   # 使用資料卷來持久化 MySQL 資料
+    networks:
+      - app_network
+  # --------------------------------NODE--------------------------------
+  node:
+    image: node:latest
+    container_name: node
+    working_dir: /var/www/html
+    volumes:
+      - ./projects:/var/www/html
+    stdin_open: true
+    tty: true
+    networks:
+      - app_network
+  # --------------------------------PHPMYADMIN--------------------------------
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql         # 這裡指定連線的 MySQL 主機名稱，必須與 MySQL 服務名稱相符
+      PMA_PORT: 3306          # MySQL 服務使用的端口
+    ports:
+      - "8080:80"             # 將容器的 80 端口映射到主機的 8080 端口，之後可透過 http://localhost:8080 存取 phpMyAdmin
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
