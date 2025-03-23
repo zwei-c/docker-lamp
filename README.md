@@ -16,6 +16,10 @@ docker-deploy/
 │   ├── setup.sh            # 環境安裝腳本
 │   ├── deploy.sh           # 專案部署腳本
 │   └── alias.sh            # 別名定義腳本
+├── workspace/              # 開發環境容器
+│   ├── Dockerfile          # Workspace 的 Dockerfile
+│   ├── supervisord.conf    # Supervisor 配置（管理多服務）
+│   └── bashrc              # Bash 配置和別名
 ├── nginx/                  # Nginx 設定
 │   ├── Dockerfile          # Nginx 的 Dockerfile
 │   ├── default.conf        # Nginx 的預設配置檔案
