@@ -6,6 +6,38 @@
 
 ## 目錄結構
 
+```
+├── docker/
+│   ├── nginx/
+│   │   ├── conf.d/
+│   │   └── global.conf
+│   ├── php/
+│   │   ├── 7.3/
+│   │   │   ├── Dockerfile
+│   │   │   └── php.ini
+│   │   ├── 7.4/
+│   │   │   ├── Dockerfile
+│   │   │   └── php.ini
+│   │   ├── 8.0/
+│   │   │   ├── Dockerfile
+│   │   │   └── php.ini
+│   │   ├── 8.1/
+│   │   │   ├── Dockerfile
+│   │   │   └── php.ini
+│   │   └── 8.3/
+│   │       ├── Dockerfile
+│   │       └── php.ini
+│   └── workspace/
+│       └── Dockerfile
+├── projects/
+│   └── .gitkeep
+├── scripts/
+│   ├── deploy.sh
+│   └── setup.sh
+├── docker-compose.yml
+└── README.md
+```
+
 ## 必要條件
 
 - WSL 1.1.3.0 版或更新版本。

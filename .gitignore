@@ -1,15 +1,7 @@
+# 不追蹤新加入的專案 vhost 設定
+docker/nginx/conf.d/*.conf
+!docker/nginx/conf.d/global.conf
+
+# 不追蹤新加入的專案資料夾
 projects/*
-
 !projects/.gitkeep
-
-nginx/*.conf
-
-nginx/*.bak
-
-nginx/logs/*
-
-!nginx/.gitkeep
-
-!mysql/.gitkeep
-
-.env
