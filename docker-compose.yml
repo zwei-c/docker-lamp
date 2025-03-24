@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./projects:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/global.conf:/etc/nginx/conf.d/global.conf:ro
+    depends_on:
+      - php73
+      - php74
+      - php80
+      - php81
+      - php83
+
+  php73:
+    build: ./docker/php/7.3
+    container_name: php73
+
+  php74:
+    build: ./docker/php/7.4
+    container_name: php74
+
+  php80:
+    build: ./docker/php/8.0
+    container_name: php80
+
+  php81:
+    build: ./docker/php/8.1
+    container_name: php81
+
+  php83:
+    build: ./docker/php/8.3
+    container_name: php83
+
+  workspace:
+    build: ./docker/workspace
+    container_name: workspace
+    working_dir: /var/www
+    volumes:
+      - ./projects:/var/www
+    entrypoint: ["/bin/sh"]
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  mysql-data:

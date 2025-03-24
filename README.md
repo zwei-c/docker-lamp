@@ -6,51 +6,6 @@
 
 ## 目錄結構
 
-```plaintext
-docker-deploy/
-├── .env                    # 環境變數檔案
-├── .env.example            # 環境變數範例檔案
-├── docker-compose.yml      # Docker Compose 主配置檔
-├── .gitignore              # Git 忽略檔案
-├── scripts/                # 腳本目錄
-│   ├── setup.sh            # 環境安裝腳本
-│   ├── deploy.sh           # 專案部署腳本
-│   └── alias.sh            # 別名定義腳本
-├── workspace/              # 開發環境容器
-│   ├── Dockerfile          # Workspace 的 Dockerfile
-│   ├── supervisord.conf    # Supervisor 配置（管理多服務）
-│   └── bashrc              # Bash 配置和別名
-├── nginx/                  # Nginx 設定
-│   ├── Dockerfile          # Nginx 的 Dockerfile
-│   ├── default.conf        # Nginx 的預設配置檔案
-│   ├── example.conf        # Nginx 的站點範例配置檔案
-│   ├── conf.d/             # Nginx 站點配置檔案
-│   └── logs/               # Nginx 日誌目錄
-├── php/                    # PHP 設定
-│   ├── 7.3/                # PHP 7.3 相關檔案
-│   │   ├── Dockerfile      # PHP 7.3 的 Dockerfile
-│   │   └── php.ini         # PHP 7.3 的設定檔
-│   ├── 7.4/                # PHP 7.4 相關檔案
-│   │   ├── Dockerfile      # PHP 7.4 的 Dockerfile
-│   │   └── php.ini         # PHP 7.4 的設定檔
-│   ├── 8.0/                # PHP 8.0 相關檔案
-│   │   ├── Dockerfile      # PHP 8.0 的 Dockerfile
-│   │   └── php.ini         # PHP 8.0 的設定檔
-│   ├── 8.1/                # PHP 8.1 相關檔案
-│   │   ├── Dockerfile      # PHP 8.1 的 Dockerfile
-│   │   └── php.ini         # PHP 8.1 的設定檔
-│   └── 8.3/                # PHP 8.3 相關檔案
-│       ├── Dockerfile      # PHP 8.3 的 Dockerfile
-│       └── php.ini         # PHP 8.3 的設定檔
-├── mysql/                  # MySQL 設定
-│   └── my.cnf              # MySQL 配置檔案
-├── redis/                  # Redis 設定
-│   ├── Dockerfile          # Redis 的 Dockerfile (如需自定義)
-│   └── redis.conf          # Redis 配置檔案
-└── projects/               # 專案目錄
-    └── .gitkeep            # 保持目錄存在的空檔案
-```
-
 ## 必要條件
 
 - WSL 1.1.3.0 版或更新版本。
