@@ -10,7 +10,8 @@
 ├── docker/
 │   ├── nginx/
 │   │   ├── conf.d/
-│   │   └── global.conf
+│   │   ├── Dockerfile
+│   │   └── nginx.conf
 │   ├── php/
 │   │   ├── 7.3/
 │   │   │   ├── Dockerfile

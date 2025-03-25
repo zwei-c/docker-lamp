@@ -14,7 +14,6 @@ RUN apt-get update && apt-get install -y \
         pdo \
         pdo_mysql \
         mbstring \
-        tokenizer \
         xml \
         curl \
         zip \

@@ -1,13 +1,12 @@
 services:
   nginx:
-    image: nginx:latest
+    build: ./docker/nginx
     container_name: nginx
     ports:
       - "80:80"
     volumes:
       - ./projects:/var/www
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
-      - ./docker/nginx/global.conf:/etc/nginx/conf.d/global.conf:ro
     depends_on:
       - php73
       - php74
