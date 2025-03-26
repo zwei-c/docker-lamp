@@ -15,32 +15,52 @@ services:
       - php83
 
   php73:
-    build: ./docker/php/7.3
+    build:
+      context: ./docker/php/7.3
     container_name: php73
+    volumes:
+      - ./projects:/var/www
 
   php74:
-    build: ./docker/php/7.4
+    build:
+      context: ./docker/php/7.4
     container_name: php74
+    volumes:
+      - ./projects:/var/www
 
   php80:
-    build: ./docker/php/8.0
+    build:
+      context: ./docker/php/8.0
     container_name: php80
+    volumes:
+      - ./projects:/var/www
 
   php81:
-    build: ./docker/php/8.1
+    build:
+      context: ./docker/php/8.1
     container_name: php81
+    volumes:
+      - ./projects:/var/www
 
   php83:
-    build: ./docker/php/8.3
+    build:
+      context: ./docker/php/8.3
     container_name: php83
+    volumes:
+      - ./projects:/var/www
 
   workspace:
-    build: ./docker/workspace
+    build:
+      context: ./docker/workspace
     container_name: workspace
     working_dir: /var/www
     volumes:
       - ./projects:/var/www
-    command: ["/bin/bash", "-c", "cron -f"]
+    command: ["/bin/bash", "-c", "sudo cron -f"]
+    ports:
+      - "5173:5173"
+      - "5174:5174"
+      - "5175:5175"
 
   mysql:
     image: mysql:8.0

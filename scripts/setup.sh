@@ -2,6 +2,12 @@
 
 # 互動式專案設定腳本
 
+# 檢查是否是 root 權限
+if [ "$EUID" -ne 0 ]; then
+    echo "錯誤：請使用 root 權限執行此腳本。"
+    exit 1
+fi
+
 read -p "輸入專案名稱 (如 project1): " PROJECT_NAME
 PROJECT_DIR="../projects/$PROJECT_NAME"
 echo "專案資料夾: $PROJECT_DIR"
@@ -47,4 +53,14 @@ docker-compose exec -T mysql mysql -uroot -p123456 -e "CREATE DATABASE IF NOT EX
 # 重載 nginx
 docker-compose exec -T nginx nginx -s reload >/dev/null 2>&1
 
+# 新增 host紀錄
+echo "127.0.0.1 $PROJECT_NAME.test" >>/etc/hosts
+
 echo "專案設定完成，已建立資料庫並設定 Nginx。"
+
+# 新增 host 紀錄
+echo "請記得在 Windows 的 hosts 文件 (C:\Windows\System32\drivers\etc\hosts) 中加入："
+echo "127.0.0.1 $PROJECT_NAME.test"
+
+# 提示使用者重新啟動 Docker Desktop
+echo "請記得重新啟動 Docker Desktop 以使設定生效。"
